@@ -1,0 +1,29 @@
+3974. Maximum Total Sum of K Selected Elements
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @param {number} mul
+ * @return {number}
+ */
+var maxSum = function(nums, k, mul) {
+    nums.sort((a, b) => b-a);
+
+    let sum = 0;
+
+    for(let i = 0; i < k; i++) {
+        if(mul > 0) {
+            sum = sum + (nums[i] * mul);
+            mul--;
+        } else {
+            sum += nums[i];
+        }
+    }
+
+    return sum;
+};
+
+/*
+T(n) = O(nlogn)
+S(n) = O(1)
+*/
