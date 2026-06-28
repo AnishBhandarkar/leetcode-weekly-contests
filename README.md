@@ -2,18 +2,6 @@
 
 This repository contains my solutions to LeetCode Weekly and Biweekly Contest problems in JavaScript.
 
-## 📂 Repository Structure
-
-```
-.
-├── Weekly Contest 508
-│   ├── 3974. Maximum Total Sum of K Selected Elements
-│   ├── 3975. Filter Occupied Intervals
-│   └── README.md
-│
-│
-└── README.md
-```
 
 ## 📖 Contest Folder
 
