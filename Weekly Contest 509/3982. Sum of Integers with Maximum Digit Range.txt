@@ -1,0 +1,43 @@
+3982. Sum of Integers with Maximum Digit Range
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxDigitRange = function (nums) {
+    let map = new Map();
+    let maxDigitRange = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        let digitRange = getDigitRange(nums[i]);
+        maxDigitRange = Math.max(maxDigitRange, digitRange);
+
+        if (!map.has(digitRange)) {
+            map.set(digitRange, []);
+        }
+        map.get(digitRange).push(nums[i]);
+    }
+    let maxDigits = map.get(maxDigitRange);
+    let result = maxDigits.reduce((ele, acc) => ele + acc);
+    return result;
+};
+
+function getDigitRange(num) {
+    let arr = [];
+    while (num > 0) {
+        arr.push(num % 10);
+        num = Math.trunc(num / 10);
+    }
+    let max = Math.max(...arr);
+    let min = Math.min(...arr);
+    return max - min;
+}
+
+
+/*
+T(n) = O(n * d)
+S(n) = O(n)
+*/
+
+Note: Solution possible with O(1) space.

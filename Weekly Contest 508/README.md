@@ -5,7 +5,7 @@
 ## Performance
 
 - ✅ Solved: **2 / 4**
-- 🏆 Rank: **12,632 / 37,970** *(Provisional)*
+- 🏆 Rank: **12,124 / 37,970**
 - 💯 Score: **8**
 
 ## Problems

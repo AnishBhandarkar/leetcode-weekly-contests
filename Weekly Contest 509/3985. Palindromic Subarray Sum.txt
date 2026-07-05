@@ -1,0 +1,59 @@
+3985. Palindromic Subarray Sum
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var getSum = function (nums) {
+    let maxSum = 0;
+    let n = nums.length;
+
+    // check odd-length palindromes
+    for (let i = 0; i < n; i++) {
+        let left = i;
+        let right = i;
+        let sum = 0;
+
+        while (left >= 0 && right < n && nums[left] === nums[right]) {
+            if (left === right) {
+                sum += nums[left];
+            } else {
+                sum += nums[left] + nums[right];
+            }
+            maxSum = Math.max(maxSum, sum);
+            left--;
+            right++;
+        }
+    }
+
+    // check even-length palindromes
+    for (let i = 0; i < n - 1; i++) {
+        let left = i;
+        let right = i + 1;
+        let sum = 0;
+
+        while (left >= 0 && right < n && nums[left] === nums[right]) {
+            sum += nums[left] + nums[right];
+            maxSum = Math.max(maxSum, sum);
+            left--;
+            right++;
+        }
+    }
+
+    return maxSum;
+};
+
+
+/*
+T(n) = O(n^2)
+S(n) = O(1)
+*/
+
+
+Note:
+This solution will get TLE.
+Bcoz of 1 <= nums.length <= 10^5.
+
+
+Optimal solution exist with O(n) time. Use Manacher's algorithm
