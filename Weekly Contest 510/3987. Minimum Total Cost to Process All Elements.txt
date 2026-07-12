@@ -1,0 +1,110 @@
+3987. Minimum Total Cost to Process All Elements
+
+
+// Approach 1:
+
+(TLE)
+
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var minimumCost = function (nums, k) {
+    const MOD = BigInt(10 ** 9 + 7);
+
+    let resources = BigInt(k);
+    let totalCost = 0n;
+    let totalOps = 0n;
+
+    for (let num of nums) {
+        const x = BigInt(num);
+
+        if (x > resources) {
+            // Need more resources
+            const need = x - resources;
+
+            // Min no. of operations needed = ceil(need / k)
+            const ops = (need + BigInt(k) - 1n) / BigInt(k);
+
+            // calculate totalcost
+            for (let i = 1n; i <= ops; i++) {
+                // totalCost += totalOps + i;
+                totalCost = (totalCost + totalOps + i) % MOD;
+            }
+
+            totalOps += ops;
+
+            resources += ops * BigInt(k);
+        }
+
+        resources = resources - x;
+    }
+
+    return Number(totalCost);
+};
+
+/*
+T(n) = O(n * ops)
+S(n) = O(1)
+*/
+
+
+---
+
+
+
+// Approach 2:
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var minimumCost = function (nums, k) {
+    const MOD = BigInt(10 ** 9 + 7);
+
+    let resources = BigInt(k);
+    let totalCost = 0n;
+    let totalOps = 0n;
+
+    for (let num of nums) {
+        const x = BigInt(num);
+
+        if (x > resources) {
+            // Need more resources
+            const need = x - resources;
+
+            // Min no. of operations needed = ceil(need / k)
+            const ops = (need + BigInt(k) - 1n) / BigInt(k);
+
+            // calculate totalcost
+            /*
+            for (let i = 1n; i <= ops; i++) {
+                // totalCost += totalOps + i;
+                totalCost = (totalCost + totalOps + i) % MOD;
+            }
+            */
+
+            const first = totalOps + 1n;
+            const last = totalOps + ops;
+
+            const cost = (ops * (first + last)) / 2n;
+            totalCost = (totalCost + cost) % MOD;
+
+            totalOps += ops;
+
+            resources += ops * BigInt(k);
+        }
+
+        resources = resources - x;
+    }
+
+    return Number(totalCost);
+};
+
+/*
+T(n) = O(n)
+S(n) = O(1)
+*/

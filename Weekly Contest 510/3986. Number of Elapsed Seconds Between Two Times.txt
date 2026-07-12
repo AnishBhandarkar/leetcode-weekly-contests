@@ -1,0 +1,43 @@
+3986. Number of Elapsed Seconds Between Two Times
+
+
+/**
+ * @param {string} startTime
+ * @param {string} endTime
+ * @return {number}
+ */
+var secondsBetweenTimes = function (startTime, endTime) {
+    const startTimeArr = startTime.split(":");
+    const endTimeArr = endTime.split(":");
+
+    let startInSec = 0;
+    startInSec += startTimeArr[0] * 3600;
+    startInSec += startTimeArr[1] * 60;
+    startInSec += Number(startTimeArr[2]);
+
+    let endInSec = 0;
+    endInSec += endTimeArr[0] * 3600;
+    endInSec += endTimeArr[1] * 60;
+    endInSec += Number(endTimeArr[2]);
+
+    return endInSec - startInSec;
+};
+
+/*
+T(n) = S(n) = O(1)
+*/
+
+
+---
+
+// More elegant way:
+
+var secondsBetweenTimes = function(startTime, endTime) {
+    const [sh, sm, ss] = startTime.split(":").map(Number);
+    const [eh, em, es] = endTime.split(":").map(Number);
+
+    const startInSec = sh * 3600 + sm * 60 + ss;
+    const endInSec = eh * 3600 + em * 60 + es;
+
+    return endInSec - startInSec;
+};
