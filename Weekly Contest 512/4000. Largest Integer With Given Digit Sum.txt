@@ -1,0 +1,45 @@
+4000. Largest Integer With Given Digit Sum
+
+
+/**
+ * @param {number} n
+ * @param {number} s
+ * @return {number}
+ */
+var largestInteger = function (n, s) {
+    if(s === 0) {
+        return 0;
+    }
+
+    const mappedVals = [
+        [1, [0, 9]],
+        [2, [10, 99]],
+        [3, [100, 999]],
+        [4, [1000, 9999]],
+        [5, [10000, 99999]],
+    ];
+    const map = new Map(mappedVals);
+
+    let largest = 0;
+
+    for (let i = map.get(n)[0]; i <= map.get(n)[1]; i++) {
+        let temp = i;
+        let sum = 0;
+
+        while (temp > 0) {
+            let digit = temp % 10;
+            sum += digit;
+            temp = Math.trunc(temp / 10);
+        }
+
+        if (sum === s) {
+            largest = Math.max(largest, i);
+        }
+    }
+    return largest === 0 ? -1 : largest;
+};
+
+/*
+T(n) = O(n * 10^n-1)
+S(n) = O(1)
+*/

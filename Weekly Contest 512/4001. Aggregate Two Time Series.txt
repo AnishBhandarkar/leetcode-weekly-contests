@@ -1,0 +1,36 @@
+4001. Aggregate Two Time Series
+
+
+/**
+ * @param {number[][]} series1
+ * @param {number[][]} series2
+ * @return {number[][]}
+ */
+var aggregateTimeSeries = function (s1, s2) {
+    let i = 0;
+    let j = 0;
+
+    let ans = [];
+
+    while (i < s1.length || j < s2.length) {
+        if (j >= s2.length || (i < s1.length && s1[i][0] < s2[j][0])) {
+            ans.push([s1[i][0], s1[i][1] + (j >= s2.length ? 0 : s2[j][1])]);
+            i++;
+        } else if (i >= s1.length || (j < s2.length && s2[j][0] < s1[i][0])) {
+            ans.push([s2[j][0], s2[j][1] + (i >= s1.length ? 0 : s1[i][1])]);
+            j++;
+        } else {
+            ans.push([s1[i][0], s1[i][1] + s2[j][1]]);
+            i++;
+            j++;
+        }
+    }
+
+    return ans;
+};
+
+
+/*
+T(n) = O(m + n)
+S(n) = O(1)
+*/
