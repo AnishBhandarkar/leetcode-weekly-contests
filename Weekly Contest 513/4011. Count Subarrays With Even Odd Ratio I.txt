@@ -1,0 +1,48 @@
+/**
+ * @param {number[]} nums
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+var countRatioSubarrays = function (nums, a, b) {
+    let validRatio = a / b;
+
+    let result = 0;
+
+    const getEvenOddCount = (i, j) => {
+        let evenCount = 0;
+        let oddCount = 0;
+
+        for (let k = i; k <= j; k++) {
+            if (nums[k] % 2 === 0) {
+                evenCount++;
+            } else {
+                oddCount++;
+            }
+        }
+        return [evenCount, oddCount];
+    };
+
+    for (let i = 0; i < nums.length; i++) {
+        let even = 0;
+        let odd = 0;
+        for (let j = i; j < nums.length; j++) {
+            if(nums[j] % 2 === 0) {
+                even++;
+            } else {
+                odd++;
+            }
+
+            if (odd > 0 && even / odd <= validRatio) {
+                result++;
+            }
+        }
+    }
+
+    return result;
+};
+
+/*
+T(n) = O(n^2)
+S(n) = O(1)
+*/

@@ -1,0 +1,29 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxPairStrength = function (nums) {
+    let maxStrength = -Infinity;
+
+    const gcd = (a, b) => {
+        while (b !== 0) {
+            [a, b] = [b, a % b];
+        }
+        return a;
+    };
+
+    for (let i = 0; i < nums.length - 1; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            let result = (nums[i] * nums[j]) / gcd(nums[i], nums[j]) ** 2;
+
+            maxStrength = Math.max(maxStrength, result);
+        }
+    }
+
+    return maxStrength;
+};
+
+/*
+T(n) = O(n^2 log(min(a, b)))
+S(n) = O(1)
+*/
