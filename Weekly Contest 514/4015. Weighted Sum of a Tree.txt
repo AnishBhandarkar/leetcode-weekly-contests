@@ -1,0 +1,61 @@
+4015. Weighted Sum of a Tree
+
+
+/**
+ * @param {number[]} parent
+ * @param {number[]} nums
+ * @return {number}
+ */
+var weightedSum = function (parent, nums) {
+    // build adjacency list.
+    const tree = new Map();
+
+    for (let i = 0; i < parent.length; i++) {
+        tree.set(i, []);
+    }
+
+    for (let i = 1; i < parent.length; i++) {
+        tree.get(parent[i]).push(i);
+    }
+
+    // apply bfs to find height.
+    let height = 0;
+    let que = [0];
+    let front = 0;
+
+    while (front < que.length) {
+        let levelSize = que.length - front;
+
+        for (let i = 0; i < levelSize; i++) {
+            let node = que[front++];
+
+            for (let child of tree.get(node)) {
+                que.push(child);
+            }
+        }
+        height++;
+    }
+
+    // find weight and also depth of each node along the way using dfs.
+    que = [[0, 1]]; // [node, depth]
+    front = 0;
+
+    let sum = 0;
+
+    while (front < que.length) {
+        let [node, depth] = que[front++];
+
+        sum += nums[node] * (height - depth + 1);
+
+        for (const child of tree.get(node)) {
+            que.push([child, depth + 1]);
+        }
+    }
+
+    return sum;
+};
+
+/*
+T(n) = O(n)
+S(n) = O(n)
+*/

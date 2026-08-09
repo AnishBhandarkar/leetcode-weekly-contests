@@ -1,0 +1,33 @@
+4014. Minimum Total Price After Applying Discounts
+
+
+/**
+ * @param {number[]} prices
+ * @param {number[]} discounts
+ * @return {number}
+ */
+var minPrice = function (prices, discounts) {
+    prices.sort((a, b) => b - a);
+    discounts.sort((a, b) => b - a);
+
+    let minSum = 0;
+
+    for (let i = 0; i < discounts.length; i++) {
+        if (prices[i]) {
+            minSum += (prices[i] * (100 - discounts[i])) / 100;
+        }
+    }
+
+    let j = discounts.length;
+    while(j < prices.length) {
+        minSum += prices[j];
+        j++;
+    }
+
+    return minSum;
+};
+
+/*
+T(n) = O(plogp + dlogd + d)
+S(n) = O(1)
+*/
