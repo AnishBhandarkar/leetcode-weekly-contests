@@ -6,7 +6,7 @@
 
 * ✅ Solved: **2 / 4**
 * 💯 Score: **7**
-* 🏆 Rank: TBD
+* 🏆 Rank: **14,994 / 45,177**
 
 ## Problems
 
