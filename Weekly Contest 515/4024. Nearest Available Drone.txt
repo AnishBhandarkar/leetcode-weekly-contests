@@ -1,0 +1,33 @@
+4024. Nearest Available Drone
+
+
+/**
+ * @param {number[][]} drones
+ * @param {number[]} target
+ * @return {number}
+ */
+var nearestDrone = function (drones, target) {
+    let minDistance = Infinity;
+    let minIndex = -1;
+    const [x2, y2] = target;
+
+    const calculateMDistance = (x1, y1) => {
+        return Math.abs(x1 - x2) + Math.abs(y1 - y2);
+    };
+
+    for (let i = 0; i < drones.length; i++) {
+        const [x, y, range] = drones[i];
+        let manHDistance = calculateMDistance(x, y);
+        if (manHDistance <= range && manHDistance < minDistance) {
+            minDistance = manHDistance;
+            minIndex = i;
+        }
+    }
+
+    return minIndex;
+};
+
+/*
+T(n) = O(n)
+S(n) = O(1)
+*/

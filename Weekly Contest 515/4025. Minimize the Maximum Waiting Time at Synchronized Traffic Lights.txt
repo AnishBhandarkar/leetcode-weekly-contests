@@ -1,0 +1,29 @@
+4025. Minimize the Maximum Waiting Time at Synchronized Traffic Lights
+
+
+/**
+ * @param {number} period
+ * @param {number[]} lights
+ * @param {number[]} arrivalTime
+ * @return {number}
+ */
+var minPenalty = function (period, lights, arrivalTime) {
+    const maxGreen = Math.max(...lights);
+    let answer = 0;
+
+    for (let i = 0; i < arrivalTime.length; i++) {
+        const r = arrivalTime[i] % period;
+
+        if (r >= maxGreen) {
+            const wait = period - r;
+            answer = Math.max(answer, wait);
+        }
+    }
+
+    return answer;
+};
+
+/*
+T(n) = O(L + AT)
+S(n) = O(1)
+*/
