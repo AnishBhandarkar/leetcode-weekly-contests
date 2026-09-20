@@ -1,0 +1,40 @@
+4057. Number of Intersecting Interval Pairs II
+
+
+The optimal approach:
+
+
+
+/**
+ * @param {number[][]} intervals
+ * @return {number}
+ */
+var countIntersectingIntervals = function (intervals) {
+    let result = 0;
+
+    // MinHeap to hold active end times (smallest end time at the top)
+    const minHeap = new MinHeap();
+
+    // 1. Sort by start time so s1 <= s2 is guaranteed
+    intervals.sort((a, b) => a[0] - b[0]);
+
+    for (const [start, end] of intervals) {
+        // 2. Remove intervals that ended before current 'start'
+        while (!minHeap.isEmpty() && minHeap.root() < start) {
+            minHeap.extractRoot();
+        }
+
+        // 3. Everything left in the heap ends at or after 'start' -> They overlap!
+        result += minHeap.size();
+
+        // 4. Add current interval's end time to heap
+        minHeap.insert(end);
+    }
+
+    return result;
+};
+
+/*
+T(n) = O(n logn)
+S(n) = O(n)
+*/

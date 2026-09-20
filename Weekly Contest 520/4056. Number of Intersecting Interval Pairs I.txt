@@ -1,0 +1,29 @@
+4056. Number of Intersecting Interval Pairs I
+
+
+The bruteforce approach:
+/**
+ * @param {number[][]} intervals
+ * @return {number}
+ */
+var countIntersectingIntervals = function (intervals) {
+    let result = 0;
+
+    for (let i = 0; i < intervals.length; i++) {
+        for (let j = i + 1; j < intervals.length; j++) {
+            const [s1, e1] = intervals[i];
+            const [s2, e2] = intervals[j];
+
+            if (s1 <= e2 && s2 <= e1) {
+                result++;
+            }
+        }
+    }
+
+    return result;
+};
+
+/*
+T(n) = O(n^2)
+S(n) = O(1)
+*/
