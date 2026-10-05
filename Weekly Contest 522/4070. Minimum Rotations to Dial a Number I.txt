@@ -1,0 +1,25 @@
+4070. Minimum Rotations to Dial a Number I
+
+
+/
+ * @param {string} s
+ * @return {number}
+ */
+var minRotations = function (s) {
+    let minRotations = 0;
+
+    s = "0" + s;
+
+    for (let i = 0; i < s.length - 1; i++) {
+        let a = s[i];
+        let b = s[i + 1];
+        minRotations += Math.min(Math.abs(a - b), 10 - Math.abs(a - b));
+    }
+
+    return minRotations;
+};
+
+/*
+T(n) = O(n)
+S(n) = O(1)
+*/
